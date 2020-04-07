@@ -119,6 +119,7 @@ if index(g:bundle_group, 'basic') >= 0
 
 	" 提供基于 TAGS 的定义预览，函数参数预览，quickfix 预览
 	Plug 'skywind3000/vim-preview'
+	Plug 'vim-scripts/taglist.vim'
 
 	" Git 支持
 	" :Gstatus调出git status查看当前状态；
@@ -228,8 +229,26 @@ if index(g:bundle_group, 'tags') >= 0
 
 	" 禁止 gutentags 自动链接 gtags 数据库
 	let g:gutentags_auto_add_gtags_cscope = 0
+	
+	set tags+=/usr/include/tags
+	set tags=./tags
+	map ta :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 endif
 
+"---------------------------------------------------------------------
+"TagList 设置
+"---------------------------------------------------------------------
+let Tlist_Ctags_Cmd='/usr/bin/ctags'
+let Tlist_Show_One_File=1                   "让taglist可以同时展示多个文件的函数列表
+let Tlist_Exit_OnlyWindow=1                 "当taglist是最后一个分割窗口时，自动推出vim
+let Tlist_Auto_Open=1                       "设置自动打开
+let Tlist_Process_File_Always=1             "设置一直加载tag
+let Tlist_Use_SingleClick=0                 "设置点击跳转到tag处
+let Tlist_Close_On_Select=0                 "设置选中关闭
+let Tlist_File_Fold_Auto_Close=1            "设置显示多个文件的tag时，只显示当前文件的
+"let Tlist_GainFocus_On_ToggleOpen=0        "设置打开文件的时候，焦点在tag窗口
+"中
+"noremap <silent> <F8> :TlistToggle<CR>
 
 "----------------------------------------------------------------------
 " 文本对象：textobj 全家桶
