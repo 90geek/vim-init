@@ -92,6 +92,8 @@ augroup END
 if index(g:bundle_group, 'basic') >= 0
 
 	" 展示开始画面，显示最近编辑过的文件
+	" :SLoad       load a session    startify-:SLoad
+	" :SClose 
 	Plug 'mhinz/vim-startify'
 
 	" 一次性安装一大堆 colorscheme
@@ -100,10 +102,12 @@ if index(g:bundle_group, 'basic') >= 0
 	" 支持库，给其他插件用的函数库
 	Plug 'xolox/vim-misc'
 
-	" 用于在侧边符号栏显示 marks （ma-mz 记录的位置）
+	" 用于在侧边符号栏显示(标记) marks （m(字母)a-mz 记录的位置）
+	" dma-dmz  删除标记
+	" m/ 打开列表
 	Plug 'kshenoy/vim-signature'
 
-	" 用于在侧边符号栏显示 git/svn 的 diff
+	" 用于在侧边符号栏显示 git/svn 的 diff(+-号表示改变)
 	Plug 'mhinz/vim-signify'
 
 	" 根据 quickfix 中匹配到的错误信息，高亮对应文件的错误行
@@ -117,6 +121,9 @@ if index(g:bundle_group, 'basic') >= 0
 	Plug 'skywind3000/vim-preview'
 
 	" Git 支持
+	" :Gstatus调出git status查看当前状态；
+	" :Gread是git checkout — filename缓冲区而不是文件名的变体；
+	" :Gwrite 是:Git add %
 	Plug 'tpope/vim-fugitive'
 
 	" 使用 ALT+E 来选择窗口
@@ -155,7 +162,7 @@ if index(g:bundle_group, 'enhanced') >= 0
 	" 快速文件搜索
 	Plug 'junegunn/fzf'
 
-	" 给不同语言提供字典补全，插入模式下 c-x c-k 触发
+	" 给不同语言提供字典补全，插入模式下 ctrl-x c-k 触发
 	Plug 'asins/vim-dict'
 
 	" 使用 :FlyGrep 命令进行实时 grep
@@ -184,7 +191,7 @@ endif
 if index(g:bundle_group, 'tags') >= 0
 
 	" 提供 ctags/gtags 后台数据库自动更新功能
-	Plug 'ludovicchabant/vim-gutentags'
+	"Plug 'ludovicchabant/vim-gutentags'
 
 	" 提供 GscopeFind 命令并自动处理好 gtags 数据库切换
 	" 支持光标移动到符号名上：<leader>cg 查看定义，<leader>cs 查看引用
@@ -281,7 +288,7 @@ endif
 
 
 "----------------------------------------------------------------------
-" airline
+" airline 状态栏美化插件
 "----------------------------------------------------------------------
 if index(g:bundle_group, 'airline') >= 0
 	Plug 'vim-airline/vim-airline'
@@ -304,6 +311,8 @@ endif
 
 "----------------------------------------------------------------------
 " NERDTree
+" <space>nt :NERDTreeToggle 隐藏/显示
+" <space>nn :NERDTree 打开
 "----------------------------------------------------------------------
 if index(g:bundle_group, 'nerdtree') >= 0
 	Plug 'scrooloose/nerdtree', {'on': ['NERDTree', 'NERDTreeFocus', 'NERDTreeToggle', 'NERDTreeCWD', 'NERDTreeFind'] }
@@ -415,7 +424,8 @@ endif
 "----------------------------------------------------------------------
 " LeaderF：CtrlP / FZF 的超级代替者，文件模糊匹配，tags/函数名 选择
 "----------------------------------------------------------------------
-if index(g:bundle_group, 'leaderf') >= 0
+"if index(g:bundle_group, 'leaderf') >= 0
+if 0
 	" 如果 vim 支持 python 则启用  Leaderf
 	if has('python') || has('python3')
 		Plug 'Yggdroot/LeaderF'
