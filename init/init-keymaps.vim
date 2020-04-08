@@ -24,7 +24,7 @@
 "----------------------------------------------------------------------
 nmap <c-a> ggVG$"+y
 vmap <c-c> "+y
-set mouse=a
+"set mouse=a
 
 "----------------------------------------------------------------------
 " INSERT 模式下使用 EMACS 键位
@@ -340,8 +340,8 @@ else
 				\ '<root>' <cr>
 endif
 
-set clipboard+=unnamed
-nmap w= :resize +3<CR>                   "定义w=作为窗口行数增加快捷键
-nmap w- :resize -3<CR>                   "定义w-作为窗口行数减少快捷键
-nmap w, :vertical resize -3<CR>          "定义w,作为窗口宽度减少快捷键
-nmap w. :vertical resize +3<CR>          "定义w.作为窗口宽度增加快捷键
+"set clipboard+=unnamed
+"nmap w= :resize +3<CR>                   "定义w=作为窗口行数增加快捷键
+"nmap w- :resize -3<CR>                   "定义w-作为窗口行数减少快捷键
+"nmap w, :vertical resize -3<CR>          "定义w,作为窗口宽度减少快捷键
+"nmap w. :vertical resize +3<CR>          "定义w.作为窗口宽度增加快捷键
