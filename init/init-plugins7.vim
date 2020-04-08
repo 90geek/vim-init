@@ -230,8 +230,11 @@ if index(g:bundle_group, 'tags') >= 0
 	" 禁止 gutentags 自动链接 gtags 数据库
 	"let g:gutentags_auto_add_gtags_cscope = 0
 	
+	"分号不可少，从当前目录递归往上找
 	set tags+=/usr/include/tags
-	set tags=./tags
+	set tags=./tags;
+	"改变vim的当前目录
+	set autochdir
 	map ta :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 endif
 
