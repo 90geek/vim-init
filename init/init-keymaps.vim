@@ -339,8 +339,12 @@ else
 				\ --include='*.js' --include='*.vim'
 				\ '<root>' <cr>
 endif
-
+"与系统缓冲器相通（鼠标选中区域-鼠标中建粘贴）
 "set clipboard+=unnamed
+"与系统剪切板相通
+"set clipboard=unnamedplus
+"插入模式下使用 Shift-Insert 快捷键在粘帖系统剪贴板中的内容了
+"inoremap <S-Insert><ESC>"+p`]a"
 "nmap w= :resize +3<CR>                   "定义w=作为窗口行数增加快捷键
 "nmap w- :resize -3<CR>                   "定义w-作为窗口行数减少快捷键
 "nmap w, :vertical resize -3<CR>          "定义w,作为窗口宽度减少快捷键
