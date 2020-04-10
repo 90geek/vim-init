@@ -118,7 +118,7 @@ if index(g:bundle_group, 'basic') >= 0
 	Plug 't9md/vim-choosewin'
 
 	" 提供基于 TAGS 的定义预览，函数参数预览，quickfix 预览
-	Plug 'skywind3000/vim-preview'
+	"Plug 'skywind3000/vim-preview'
 	Plug 'vim-scripts/taglist.vim'
 
 	" Git 支持
@@ -251,6 +251,37 @@ let Tlist_Close_On_Select=0                 "设置选中关闭
 let Tlist_File_Fold_Auto_Close=1            "设置显示多个文件的tag时，只显示当前文件的
 "let Tlist_GainFocus_On_ToggleOpen=0        "设置打开文件的时候，焦点在tag窗口中
 "noremap <silent> <F8> :TlistToggle<CR>
+
+"---------------------------------------------------------------------
+"cscope 设置
+"---------------------------------------------------------------------
+if has("cscope")
+	set csprg=/usr/bin/cscope
+	set csto=0
+	set cst
+	set cscopequickfix=s-,c-,d-,i-,t-,e- " 使用QuickFix窗口来显示cscope查找结果
+	set csverb
+	set cspc=3
+	if filereadable("cscope.out")
+		cs add cscope.out
+	else
+		let cscope_file=findfile("cscope.out", ".;")
+		let cscope_pre=matchstr(cscope_file, ".*/")
+		if !empty(cscope_file) && filereadable(cscope_file)
+			exe "cs add" cscope_file cscope_pre
+		endif
+	endif
+
+	"快捷键设置
+	nmap fs :cs find s <C-R>=expand("<cword>")<CR><CR>
+	nmap fg :cs find g <C-R>=expand("<cword>")<CR><CR>
+	nmap fc :cs find c <C-R>=expand("<cword>")<CR><CR>
+	nmap ft :cs find t <C-R>=expand("<cword>")<CR><CR>
+	nmap fe :cs find e <C-R>=expand("<cword>")<CR><CR>
+	nmap ff :cs find f <C-R>=expand("<cfile>")<CR><CR>
+	nmap fi :cs find i <C-R>=expand("<cfile>")<CR><CR>
+	nmap fd :cs find d <C-R>=expand("<cword>")<CR><CR>
+endif
 
 "----------------------------------------------------------------------
 " 文本对象：textobj 全家桶
