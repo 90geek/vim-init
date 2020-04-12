@@ -161,16 +161,16 @@ if index(g:bundle_group, 'enhanced') >= 0
 	Plug 'terryma/vim-expand-region'
 
 	" 快速文件搜索
-	Plug 'junegunn/fzf'
+	" Plug 'junegunn/fzf'
 
 	" 给不同语言提供字典补全，插入模式下 ctrl-x c-k 触发
 	Plug 'asins/vim-dict'
 
-	" 使用 :FlyGrep 命令进行实时 grep
-	Plug 'wsdjeg/FlyGrep.vim'
+	" 使用 :FlyGrep 命令进行实时 grep 8.0+
+	"Plug 'wsdjeg/FlyGrep.vim'
 
-	" 使用 :CtrlSF 命令进行模仿 sublime 的 grep
-	Plug 'dyng/ctrlsf.vim'
+	" 使用 :CtrlSF 命令进行模仿 sublime 的 grep 8.0+
+	"Plug 'dyng/ctrlsf.vim'
 
 	" 配对括号和引号自动补全
 	Plug 'Raimondi/delimitMate'
@@ -242,45 +242,55 @@ endif
 "TagList 设置
 "---------------------------------------------------------------------
 let Tlist_Ctags_Cmd='/usr/bin/ctags'
-let Tlist_Show_One_File=1                   "让taglist可以同时展示多个文件的函数列表
+let Tlist_Show_One_File=1                   "让taglisti不可以同时展示多个文件的函数列表
 let Tlist_Exit_OnlyWindow=1                 "当taglist是最后一个分割窗口时，自动推出vim
 let Tlist_Auto_Open=1                       "设置自动打开
 let Tlist_Process_File_Always=1             "设置一直加载tag
 let Tlist_Use_SingleClick=0                 "设置点击跳转到tag处
 let Tlist_Close_On_Select=0                 "设置选中关闭
 let Tlist_File_Fold_Auto_Close=1            "设置显示多个文件的tag时，只显示当前文件的
+let Tlist_Use_Right_Window=1				"把taglist窗口放在屏幕的右侧，缺省在左侧
+"let Tlist_Show_Menu=1						"显示taglist菜单
 "let Tlist_GainFocus_On_ToggleOpen=0        "设置打开文件的时候，焦点在tag窗口中
-"noremap <silent> <F8> :TlistToggle<CR>
+noremap <silent> <F12> :TlistToggle<CR>
 
 "---------------------------------------------------------------------
 "cscope 设置
 "---------------------------------------------------------------------
 if has("cscope")
 	set csprg=/usr/bin/cscope
+	"指定:cstag的搜索顺序。0表示先搜索cscope数据库，若不匹配，再搜索tag文件，1
+	"则相反
 	set csto=0
+	":tag/Ctrl-]/vim -t将使用:cstag，而不是默认的:tag
 	set cst
+	"+(将结果追加到quickfix窗口)、-(清空上一次的结果)、0(不使用quickfix。没有指定也相当于标志为0)))
 	set cscopequickfix=s-,c-,d-,i-,t-,e- " 使用QuickFix窗口来显示cscope查找结果
-	set csverb
-	set cspc=3
+	set nocsverb		"增加cscope数据库时，将不会打印成功或失败信息
+	set cspc=3			"指定在查找结果中显示多少级文件路径,默认值0表示显示全路径,1表示只显示文件名"
 	if filereadable("cscope.out")
-		cs add cscope.out
-	else
+		cs add $PWD/cscope.out $PWD
+		"cs add cscope.out
+	else" 子目录打开，向上查找
 		let cscope_file=findfile("cscope.out", ".;")
 		let cscope_pre=matchstr(cscope_file, ".*/")
 		if !empty(cscope_file) && filereadable(cscope_file)
 			exe "cs add" cscope_file cscope_pre
 		endif
 	endif
+	set nocsverb
+	" 重复的 cscope 数据库未被加入
+	set nocscopeverbose
 
 	"快捷键设置
-	nmap fs :cs find s <C-R>=expand("<cword>")<CR><CR>
-	nmap fg :cs find g <C-R>=expand("<cword>")<CR><CR>
-	nmap fc :cs find c <C-R>=expand("<cword>")<CR><CR>
-	nmap ft :cs find t <C-R>=expand("<cword>")<CR><CR>
-	nmap fe :cs find e <C-R>=expand("<cword>")<CR><CR>
-	nmap ff :cs find f <C-R>=expand("<cfile>")<CR><CR>
-	nmap fi :cs find i <C-R>=expand("<cfile>")<CR><CR>
-	nmap fd :cs find d <C-R>=expand("<cword>")<CR><CR>
+	nmap fs :cs find s <C-R>=expand("<cword>")<CR><CR>"0.查找C语言符号，即查找函数名、宏、枚举值等出现的地方
+	nmap fg :cs find g <C-R>=expand("<cword>")<CR><CR>"1.查找这个函数、宏、枚举定义,类似ctags
+	nmap fd :cs find d <C-R>=expand("<cword>")<CR><CR>"2.查找被这个函数调用的函数
+	nmap fc :cs find c <C-R>=expand("<cword>")<CR><CR>"3.查找调用该函数的函数
+	nmap ft :cs find t <C-R>=expand("<cword>")<CR><CR>"4.查找这个文本字符串
+	nmap fe :cs find e <C-R>=expand("<cword>")<CR><CR>"6.查找这个egrep的pattern
+	nmap ff :cs find f <C-R>=expand("<cfile>")<CR><CR>"7.查找这个文件,类似vim的find功能
+	nmap fi :cs find i <C-R>=expand("<cfile>")<CR><CR>"8.查找包含本文件的文
 endif
 
 "----------------------------------------------------------------------
@@ -476,10 +486,10 @@ endif
 "----------------------------------------------------------------------
 " LeaderF：CtrlP / FZF 的超级代替者，文件模糊匹配，tags/函数名 选择
 "----------------------------------------------------------------------
-"if index(g:bundle_group, 'leaderf') >= 0
-if 0
+if index(g:bundle_group, 'leaderf') >= 0
+
 	" 如果 vim 支持 python 则启用  Leaderf
-	if has('python') || has('python3')
+	if v:version >= 800 && (has('python') || has('python3'))
 		Plug 'Yggdroot/LeaderF'
 
 		" CTRL+p 打开文件模糊匹配

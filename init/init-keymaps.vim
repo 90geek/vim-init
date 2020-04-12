@@ -26,8 +26,8 @@ nmap <c-a> ggVG$"+y
 vnoremap <c-c> "+y
 "set mouse=a
 
-"ctrl+s 保存,
-nmap <C-s> :w!<CR>
+"ctrl+s 保存,.bashrc中加入stty -ixon 
+nmap zz :w!<CR>
 vmap <C-s> :w!<CR>
 imap <C-s> <Esc>:w!<CR>
 "----------------------------------------------------------------------
