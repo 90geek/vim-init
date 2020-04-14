@@ -283,14 +283,22 @@ if has("cscope")
 	set nocscopeverbose
 
 	"快捷键设置
-	nmap fs :cs find s <C-R>=expand("<cword>")<CR><CR>"0.查找C语言符号，即查找函数名、宏、枚举值等出现的地方
-	nmap fg :cs find g <C-R>=expand("<cword>")<CR><CR>"1.查找这个函数、宏、枚举定义,类似ctags
-	nmap fd :cs find d <C-R>=expand("<cword>")<CR><CR>"2.查找被这个函数调用的函数
-	nmap fc :cs find c <C-R>=expand("<cword>")<CR><CR>"3.查找调用该函数的函数
-	nmap ft :cs find t <C-R>=expand("<cword>")<CR><CR>"4.查找这个文本字符串
-	nmap fe :cs find e <C-R>=expand("<cword>")<CR><CR>"6.查找这个egrep的pattern
-	nmap ff :cs find f <C-R>=expand("<cfile>")<CR><CR>"7.查找这个文件,类似vim的find功能
-	nmap fi :cs find i <C-R>=expand("<cfile>")<CR><CR>"8.查找包含本文件的文
+	"0.查找C语言符号，即查找函数名、宏、枚举值等出现的地方
+	nnoremap fs :cs find s <C-R>=expand("<cword>")<CR><CR>
+	"1.查找这个函数、宏、枚举定义,类似ctags
+	nmap fg :cs find g <C-R>=expand("<cword>")<CR><CR>
+	"2.查找被这个函数调用的函数
+	nmap fd :cs find d <C-R>=expand("<cword>")<CR><CR>
+	"3.查找调用该函数的函数
+	nmap fc :cs find c <C-R>=expand("<cword>")<CR><CR>
+	"4.查找这个文本字符串
+	nmap ft :cs find t <C-R>=expand("<cword>")<CR><CR>
+	"6.查找这个egrep的pattern
+	nmap fe :cs find e <C-R>=expand("<cword>")<CR><CR>"
+	"7.查找这个文件,类似vim的find功能
+	nmap ff :cs find f <C-R>=expand("<cfile>")<CR><CR> 
+	"8.查找包含本文件的文
+	nmap fi :cs find i <C-R>=expand("<cfile>")<CR><CR>
 endif
 
 "----------------------------------------------------------------------
