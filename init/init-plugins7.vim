@@ -119,7 +119,6 @@ if index(g:bundle_group, 'basic') >= 0
 
 	" 提供基于 TAGS 的定义预览，函数参数预览，quickfix 预览
 	"Plug 'skywind3000/vim-preview'
-	Plug 'vim-scripts/taglist.vim'
 
 	" Git 支持
 	" :Gstatus调出git status查看当前状态；
@@ -246,7 +245,7 @@ let Tlist_Show_One_File=1                   "让taglisti不可以同时展示多
 let Tlist_Exit_OnlyWindow=1                 "当taglist是最后一个分割窗口时，自动推出vim
 let Tlist_Auto_Open=1                       "设置自动打开
 let Tlist_Process_File_Always=1             "设置一直加载tag
-let Tlist_Use_SingleClick=0                 "设置点击跳转到tag处
+let Tlist_Use_SingleClick=1                 "设置点击跳转到tag处
 let Tlist_Close_On_Select=0                 "设置选中关闭
 let Tlist_File_Fold_Auto_Close=1            "设置显示多个文件的tag时，只显示当前文件的
 let Tlist_Use_Right_Window=1				"把taglist窗口放在屏幕的右侧，缺省在左侧
