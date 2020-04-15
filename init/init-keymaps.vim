@@ -330,7 +330,7 @@ endfunc
 "----------------------------------------------------------------------
 if executable('rg')
 	noremap <silent><F2> :AsyncRun! -cwd=<root> rg -n --no-heading 
-				\ --color never -g *.h -g *.c* -g *.py -g *.js -g *.vim 
+				\ --color never -g *.h -g *.c* -g *.py -g *.js -g *.vim
 				\ <C-R><C-W> "<root>" <cr>
 elseif has('win32') || has('win64')
 	noremap <silent><F2> :AsyncRun! -cwd=<root> findstr /n /s /C:"<C-R><C-W>" 
@@ -341,6 +341,8 @@ else
 	noremap <silent><F2> :AsyncRun! -cwd=<root> grep -n -s -R <C-R><C-W> 
 				\ --include='*.h' --include='*.c*' --include='*.py' 
 				\ --include='*.js' --include='*.vim'
+				\--include='*.inf' --include='*.dsc' --include='*.dec' --include='*.fdf'
+				\--include='*.S' --include='*.uni' --include='*.Vfr' --include='vfr' --include='*.sh'
 				\ '<root>' <cr>
 endif
 "与系统缓冲器相通（鼠标选中区域-鼠标中建粘贴）
