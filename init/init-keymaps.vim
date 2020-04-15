@@ -24,12 +24,20 @@
 "----------------------------------------------------------------------
 nmap <c-a> ggVG$"+y
 vnoremap <c-c> "+y
+"鼠标开启关闭快捷键
 "set mouse=a
+nnoremap <silent><space><space> :set mouse=a<CR>
+nnoremap <silent><space><space><space> :set mouse=<CR>
 
 "ctrl+s 保存,.bashrc中加入stty -ixon 
 nmap zz :w!<CR>
 vmap <C-s> :w!<CR>
 imap <C-s> <Esc>:w!<CR>
+
+"与系统缓冲器相通（鼠标选中区域-鼠标中建粘贴）
+"set clipboard+=unnamed
+"与系统剪切板相通
+"set clipboard=unnamedplus
 "----------------------------------------------------------------------
 " INSERT 模式下使用 EMACS 键位
 "----------------------------------------------------------------------
@@ -85,28 +93,28 @@ noremap <silent><leader>0 10gt<cr>
 
 
 "----------------------------------------------------------------------
-" ALT+N 切换 tab
+" <space>+N 切换 tab
 "----------------------------------------------------------------------
-noremap <silent><m-1> :tabn 1<cr>
-noremap <silent><m-2> :tabn 2<cr>
-noremap <silent><m-3> :tabn 3<cr>
-noremap <silent><m-4> :tabn 4<cr>
-noremap <silent><m-5> :tabn 5<cr>
-noremap <silent><m-6> :tabn 6<cr>
-noremap <silent><m-7> :tabn 7<cr>
-noremap <silent><m-8> :tabn 8<cr>
-noremap <silent><m-9> :tabn 9<cr>
-noremap <silent><m-0> :tabn 10<cr>
-inoremap <silent><m-1> <ESC>:tabn 1<cr>
-inoremap <silent><m-2> <ESC>:tabn 2<cr>
-inoremap <silent><m-3> <ESC>:tabn 3<cr>
-inoremap <silent><m-4> <ESC>:tabn 4<cr>
-inoremap <silent><m-5> <ESC>:tabn 5<cr>
-inoremap <silent><m-6> <ESC>:tabn 6<cr>
-inoremap <silent><m-7> <ESC>:tabn 7<cr>
-inoremap <silent><m-8> <ESC>:tabn 8<cr>
-inoremap <silent><m-9> <ESC>:tabn 9<cr>
-inoremap <silent><m-0> <ESC>:tabn 10<cr>
+noremap <silent><space>1 :tabn 1<cr>
+noremap <silent><space>2 :tabn 2<cr>
+noremap <silent><space>3 :tabn 3<cr>
+noremap <silent><space>4 :tabn 4<cr>
+noremap <silent><space>5 :tabn 5<cr>
+noremap <silent><space>6 :tabn 6<cr>
+noremap <silent><space>7 :tabn 7<cr>
+noremap <silent><space>8 :tabn 8<cr>
+noremap <silent><space>9 :tabn 9<cr>
+noremap <silent><space>0 :tabn 10<cr>
+inoremap <silent><space>1 <ESC>:tabn 1<cr>
+inoremap <silent><space>2 <ESC>:tabn 2<cr>
+inoremap <silent><space>3 <ESC>:tabn 3<cr>
+inoremap <silent><space>4 <ESC>:tabn 4<cr>
+inoremap <silent><space>5 <ESC>:tabn 5<cr>
+inoremap <silent><space>6 <ESC>:tabn 6<cr>
+inoremap <silent><space>7 <ESC>:tabn 7<cr>
+inoremap <silent><space>8 <ESC>:tabn 8<cr>
+inoremap <silent><space>9 <ESC>:tabn 9<cr>
+inoremap <silent><space>0 <ESC>:tabn 10<cr>
 
 
 " MacVim 允许 CMD+数字键快速切换标签
@@ -345,7 +353,3 @@ else
 				\--include='*.S' --include='*.uni' --include='*.Vfr' --include='vfr' --include='*.sh'
 				\ '<root>' <cr>
 endif
-"与系统缓冲器相通（鼠标选中区域-鼠标中建粘贴）
-"set clipboard+=unnamed
-"与系统剪切板相通
-"set clipboard=unnamedplus

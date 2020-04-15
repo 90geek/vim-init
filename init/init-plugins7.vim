@@ -248,9 +248,10 @@ let Tlist_Process_File_Always=1             "设置一直加载tag
 let Tlist_Use_SingleClick=1                 "设置点击跳转到tag处
 let Tlist_Close_On_Select=0                 "设置选中关闭
 let Tlist_File_Fold_Auto_Close=1            "设置显示多个文件的tag时，只显示当前文件的
-let Tlist_Use_Right_Window=1				"把taglist窗口放在屏幕的右侧，缺省在左侧
-"let Tlist_Show_Menu=1						"显示taglist菜单
+let Tlist_Use_Right_Window=1                "把taglist窗口放在屏幕的右侧，缺省在左侧
+"let Tlist_Show_Menu=1                      "显示taglist菜单
 "let Tlist_GainFocus_On_ToggleOpen=0        "设置打开文件的时候，焦点在tag窗口中
+let Tlist_Process_File_Always=1             "实时更新tags
 noremap <silent> <F12> :TlistToggle<CR>
 
 "---------------------------------------------------------------------
@@ -389,6 +390,8 @@ if index(g:bundle_group, 'nerdtree') >= 0
 	let g:NERDTreeMinimalUI = 1
 	let g:NERDTreeDirArrows = 1
 	let g:NERDTreeHijackNetrw = 0
+	"let NERDTreeShowBookmarks=1            "自动显示书签
+	"autocmd VimEnter * NERDTree            "默认开启
 	noremap <space>nn :NERDTree<cr>
 	noremap <space>no :NERDTreeFocus<cr>
 	noremap <space>nm :NERDTreeMirror<cr>
