@@ -348,8 +348,9 @@ elseif has('win32') || has('win64')
 else
 	noremap <silent><F2> :AsyncRun! -cwd=<root> grep -n -s -R <C-R><C-W> 
 				\ --include='*.h' --include='*.c*' --include='*.py' 
-				\ --include='*.js' --include='*.vim'
-				\--include='*.inf' --include='*.dsc' --include='*.dec' --include='*.fdf'
-				\--include='*.S' --include='*.uni' --include='*.Vfr' --include='vfr' --include='*.sh'
+				\ --include='*.js' --include='*.vim' 
+				\--include='*.inf' --include='*.dsc' --include='*.dec' --include='*.fdf' 
+				\--include='*.S' --include='*.uni' --include='*.Vfr' --include='vfr' --include='*.sh' 
+				\--exclude-dir=Build
 				\ '<root>' <cr>
 endif
