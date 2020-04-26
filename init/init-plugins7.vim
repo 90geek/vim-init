@@ -267,7 +267,7 @@ if has("cscope")
 	"+(将结果追加到quickfix窗口)、-(清空上一次的结果)、0(不使用quickfix。没有指定也相当于标志为0)))
 	set cscopequickfix=s-,c-,d-,i-,t-,e- " 使用QuickFix窗口来显示cscope查找结果
 	set nocsverb		"增加cscope数据库时，将不会打印成功或失败信息
-	set cspc=3			"指定在查找结果中显示多少级文件路径,默认值0表示显示全路径,1表示只显示文件名"
+	set cspc=5			"指定在查找结果中显示多少级文件路径,默认值0表示显示全路径,1表示只显示文件名"
 	if filereadable("cscope.out")
 		cs add $PWD/cscope.out $PWD
 		"cs add cscope.out
