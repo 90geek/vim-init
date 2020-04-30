@@ -13,18 +13,28 @@
 " 默认缩进模式（可以后期覆盖）
 "----------------------------------------------------------------------
 
-" 设置缩进宽度
-set sw=4
+"1:tab为两个空格
+"0:默认tab为\t，4个宽度
+let g:tab_config=1
+if g:tab_config == 1
+	set sw=2
+	set ts=2
+	set et
+	set softtabstop=2
+else
+	" 设置缩进宽度
+	set sw=4
 
-" 设置 TAB 宽度
-set ts=4
+	" 设置 TAB 宽度
+	set ts=4
 
-" 禁止展开 tab (noexpandtab)
-set noet
+	" 禁止展开 tab (不用空格noexpandtab/用空格expandtab)
+	set noet
 
-" 如果后面设置了 expandtab 那么展开 tab 为多少字符
-set softtabstop=4
-
+	" 如果后面设置了 expandtab 那么展开 tab 为对应个数的空格字符,
+	" 也会影响Backspace删除个数
+	set softtabstop=4
+endif
 
 augroup PythonTab
 	au!
