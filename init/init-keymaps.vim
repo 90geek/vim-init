@@ -250,14 +250,14 @@ endif
 " 详细见：http://www.skywind.me/blog/archives/2084
 "----------------------------------------------------------------------
 
-" 自动打开 quickfix window ，高度为 6
-let g:asyncrun_open = 6
+" 自动打开 quickfix window ，高度为 10
+let g:asyncrun_open = 10
 
 " 任务结束时候响铃提醒
 let g:asyncrun_bell = 1
 
 " 设置 F10 打开/关闭 Quickfix 窗口
-nnoremap <F10> :call asyncrun#quickfix_toggle(6)<cr>
+nnoremap <F10> :call asyncrun#quickfix_toggle(10)<cr>
 
 " F9 编译 C/C++ 文件
 nnoremap <silent> <F9> :AsyncRun gcc -Wall -O2 "$(VIM_FILEPATH)" -o "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
