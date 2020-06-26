@@ -18,16 +18,34 @@
 
 "----------------------------------------------------------------------
 " 自定义 键位
-" 全选复制
-" 可使模式复制
-" 支持鼠标全模式
 "----------------------------------------------------------------------
+"自定义leader，默认\
+let mapleader=" "
+"更改陪在后立即生效
+" map R :source $MYVIMRC<CR>
+
+" 全选复制
 nmap <c-a> ggVG$"+y
+" 可使模式复制
 vnoremap <c-c> "+y
+
 "鼠标开启关闭快捷键
-"set mouse=a
 noremap <silent><M-m> :set mouse=a<CR>
 noremap <silent><M-m><M-m> :set mouse=<CR>
+
+"光标行末
+noremap <C-i> $
+"分号顶冒号
+map ; :
+
+"取消搜索高亮
+noremap <LEADER><CR> :nohlsearch<CR>
+
+"窗口大小修改
+map <c-up> :res +5<CR>
+map <c-down> :res -5<CR>
+map <c-left> :vertical resize-5<CR>
+map <c-right> :vertical resize+5<CR>
 
 "ctrl+s 保存,.bashrc中加入stty -ixon 
 nmap zz :w!<CR>

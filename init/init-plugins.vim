@@ -114,6 +114,9 @@ if index(g:bundle_group, 'basic') >= 0
 	Plug 't9md/vim-choosewin'
 
 	" 提供基于 TAGS 的定义预览，函数参数预览，quickfix 预览
+  " 按 p键在右边打开预览窗口查看文件
+  " 直接 alt+U/D 就可以在 quickfix 中遥控 preview 窗口上下滚屏了。
+  " 大写 P 关闭预览窗口
 	Plug 'skywind3000/vim-preview'
 
 	" Git 支持
@@ -220,6 +223,7 @@ if index(g:bundle_group, 'tags') >= 0
 	" let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
 
 	" 禁止 gutentags 自动链接 gtags 数据库
+  " 避免多个项目同时编辑干扰
 	let g:gutentags_auto_add_gtags_cscope = 0
 endif
 
@@ -517,6 +521,9 @@ if index(g:bundle_group, 'leaderf') >= 0
 	endif
 endif
 
+"自动补全
+"/home/zhubo/.vim/bundles/YouCompleteMe 执行 ./install.sh
+" Plug 'Valloric/YouCompleteMe'
 
 "----------------------------------------------------------------------
 " 结束插件安装
