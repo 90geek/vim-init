@@ -92,6 +92,8 @@ augroup END
 if index(g:bundle_group, 'basic') >= 0
 
 	" 展示开始画面，显示最近编辑过的文件
+	" :SLoad       load a session    startify-:SLoad
+	" :SClose 
 	Plug 'mhinz/vim-startify'
 
 	" 一次性安装一大堆 colorscheme
@@ -100,10 +102,12 @@ if index(g:bundle_group, 'basic') >= 0
 	" 支持库，给其他插件用的函数库
 	Plug 'xolox/vim-misc'
 
-	" 用于在侧边符号栏显示 marks （ma-mz 记录的位置）
+	" 用于在侧边符号栏显示(标记) marks （m(字母)a-mz 记录的位置）
+	" dma-dmz  删除标记
+	" m/ 打开列表
 	Plug 'kshenoy/vim-signature'
 
-	" 用于在侧边符号栏显示 git/svn 的 diff
+	" 用于在侧边符号栏显示 git/svn 的 diff(+-号表示改变)
 	Plug 'mhinz/vim-signify'
 
 	" 根据 quickfix 中匹配到的错误信息，高亮对应文件的错误行
@@ -120,12 +124,15 @@ if index(g:bundle_group, 'basic') >= 0
 	Plug 'skywind3000/vim-preview'
 
 	" Git 支持
+	" :Gstatus调出git status查看当前状态；
+	" :Gread是git checkout — filename缓冲区而不是文件名的变体；
+	" :Gwrite 是:Git add %
 	Plug 'tpope/vim-fugitive'
 
 	" 使用 ALT+E 来选择窗口
 	nmap <m-e> <Plug>(choosewin)
 
-	" 默认不显示 startify 置1
+	" 默认不显示置1 startify
 	let g:startify_disable_at_vimenter = 0
 	let g:startify_session_dir = '~/.vim/session'
 
@@ -155,18 +162,22 @@ if index(g:bundle_group, 'enhanced') >= 0
 	" 用 v 选中一个区域后，ALT_+/- 按分隔符扩大/缩小选区
 	Plug 'terryma/vim-expand-region'
 
-	" 快速文件搜索
-	Plug 'junegunn/fzf'
+	if v:version >= 800
+		" 快速文件搜索
+		Plug 'junegunn/fzf'
+	endif
 
 	" 给不同语言提供字典补全，插入模式下 c-x c-k 触发
 	Plug 'asins/vim-dict'
 
-	" 使用 :FlyGrep 命令进行实时 grep
-	Plug 'wsdjeg/FlyGrep.vim'
+	if v:version >= 800
+		" 使用 :FlyGrep 命令进行实时 grep 8.0+
+		Plug 'wsdjeg/FlyGrep.vim'
 
-	" 使用 :CtrlSF 命令进行模仿 sublime 的 grep
-	Plug 'dyng/ctrlsf.vim'
-
+		" 使用 :CtrlSF 命令进行模仿 sublime 的 grep 8.0+
+		Plug 'dyng/ctrlsf.vim'
+	endif
+	
 	" 配对括号和引号自动补全
 	Plug 'Raimondi/delimitMate'
 
@@ -186,47 +197,118 @@ endif
 "----------------------------------------------------------------------
 if index(g:bundle_group, 'tags') >= 0
 
-	" 提供 ctags/gtags 后台数据库自动更新功能
-	Plug 'ludovicchabant/vim-gutentags'
+	if v:version >= 800
+		" 提供 ctags/gtags 后台数据库自动更新功能
+		Plug 'ludovicchabant/vim-gutentags'
 
-	" 提供 GscopeFind 命令并自动处理好 gtags 数据库切换
-	" 支持光标移动到符号名上：<leader>cg 查看定义，<leader>cs 查看引用
-	Plug 'skywind3000/gutentags_plus'
+		" 提供 GscopeFind 命令并自动处理好 gtags 数据库切换
+		" 支持光标移动到符号名上：<leader>cg 查看定义，<leader>cs 查看引用
+		Plug 'skywind3000/gutentags_plus'
 
-	" 设定项目目录标志：除了 .git/.svn 外，还有 .root 文件
-	let g:gutentags_project_root = ['.root']
-	let g:gutentags_ctags_tagfile = '.tags'
+		" 设定项目目录标志：除了 .git/.svn 外，还有 .root 文件
+		let g:gutentags_project_root = ['.root']
+		let g:gutentags_ctags_tagfile = '.tags'
 
-	" 默认生成的数据文件集中到 ~/.cache/tags 避免污染项目目录，好清理
-	let g:gutentags_cache_dir = expand('~/.cache/tags')
+		" 默认生成的数据文件集中到 ~/.cache/tags 避免污染项目目录，好清理
+		let g:gutentags_cache_dir = expand('~/.cache/tags')
 
-	" 默认禁用自动生成
-	let g:gutentags_modules = [] 
+		" 默认禁用自动生成
+		let g:gutentags_modules = [] 
 
-	" 如果有 ctags 可执行就允许动态生成 ctags 文件
-	if executable('ctags')
-		let g:gutentags_modules += ['ctags']
+		" 如果有 ctags 可执行就允许动态生成 ctags 文件
+		if executable('ctags')
+			let g:gutentags_modules += ['ctags']
+		endif
+
+		" 如果有 gtags 可执行就允许动态生成 gtags 数据库
+		if executable('gtags') && executable('gtags-cscope')
+			let g:gutentags_modules += ['gtags_cscope']
+		endif
+
+		" 设置 ctags 的参数
+		let g:gutentags_ctags_extra_args = []
+		let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
+		let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
+		let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+
+		" 使用 universal-ctags 的话需要下面这行，请反注释
+		" let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
+
+		" 禁止 gutentags 自动链接 gtags 数据库
+	  " 避免多个项目同时编辑干扰
+		let g:gutentags_auto_add_gtags_cscope = 0
+	else
+		"ctags 设置
+		"分号不可少，从当前目录递归往上找
+		set tags+=/usr/include/tags
+		set tags=./tags;
+		"改变vim的当前目录
+		set autochdir
+		map ta :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
+	
+		"cscope 设置
+		if has("cscope")
+			set csprg=/usr/bin/cscope
+			"指定:cstag的搜索顺序。0表示先搜索cscope数据库，若不匹配，再搜索tag文件，1
+			"则相反
+			set csto=0
+			":tag/Ctrl-]/vim -t将使用:cstag，而不是默认的:tag
+			set cst
+			"+(将结果追加到quickfix窗口)、-(清空上一次的结果)、0(不使用quickfix。没有指定也相当于标志为0)))
+			set cscopequickfix=s-,c-,d-,i-,t-,e- " 使用QuickFix窗口来显示cscope查找结果
+			set nocsverb		"增加cscope数据库时，将不会打印成功或失败信息
+			set cspc=5			"指定在查找结果中显示多少级文件路径,默认值0表示显示全路径,1表示只显示文件名"
+			if filereadable("cscope.out")
+				cs add $PWD/cscope.out $PWD
+				"cs add cscope.out
+			else" 子目录打开，向上查找
+				let cscope_file=findfile("cscope.out", ".;")
+				let cscope_pre=matchstr(cscope_file, ".*/")
+				if !empty(cscope_file) && filereadable(cscope_file)
+					exe "cs add" cscope_file cscope_pre
+				endif
+			endif
+			set nocsverb
+			" 重复的 cscope 数据库未被加入
+			set nocscopeverbose
+
+			"快捷键设置
+			"0.查找C语言符号，即查找函数名、宏、枚举值等出现的地方
+			nnoremap fs :cs find s <C-R>=expand("<cword>")<CR><CR>
+			"1.查找这个函数、宏、枚举定义,类似ctags
+			nmap fg :cs find g <C-R>=expand("<cword>")<CR><CR>
+			"2.查找被这个函数调用的函数
+			nmap fd :cs find d <C-R>=expand("<cword>")<CR><CR>
+			"3.查找调用该函数的函数
+			nmap fc :cs find c <C-R>=expand("<cword>")<CR><CR>
+			"4.查找这个文本字符串
+			nmap ft :cs find t <C-R>=expand("<cword>")<CR><CR>
+			"6.查找这个egrep的pattern
+			nmap fe :cs find e <C-R>=expand("<cword>")<CR><CR>"
+			"7.查找这个文件,类似vim的find功能
+			nmap ff :cs find f <C-R>=expand("<cfile>")<CR><CR> 
+			"8.查找包含本文件的文
+			nmap fi :cs find i <C-R>=expand("<cfile>")<CR><CR>
+		endif
 	endif
-
-	" 如果有 gtags 可执行就允许动态生成 gtags 数据库
-	if executable('gtags') && executable('gtags-cscope')
-		let g:gutentags_modules += ['gtags_cscope']
-	endif
-
-	" 设置 ctags 的参数
-	let g:gutentags_ctags_extra_args = []
-	let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
-	let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
-	let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
-
-	" 使用 universal-ctags 的话需要下面这行，请反注释
-	" let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
-
-	" 禁止 gutentags 自动链接 gtags 数据库
-  " 避免多个项目同时编辑干扰
-	let g:gutentags_auto_add_gtags_cscope = 0
 endif
 
+"---------------------------------------------------------------------
+"TagList 设置
+"---------------------------------------------------------------------
+let Tlist_Ctags_Cmd='/usr/bin/ctags'
+let Tlist_Show_One_File=1                   "让taglisti不可以同时展示多个文件的函数列表
+let Tlist_Exit_OnlyWindow=1                 "当taglist是最后一个分割窗口时，自动推出vim
+let Tlist_Auto_Open=1                       "设置自动打开
+let Tlist_Process_File_Always=1             "设置一直加载tag
+let Tlist_Use_SingleClick=1                 "设置点击跳转到tag处
+let Tlist_Close_On_Select=0                 "设置选中关闭
+let Tlist_File_Fold_Auto_Close=1            "设置显示多个文件的tag时，只显示当前文件的
+let Tlist_Use_Right_Window=1                "把taglist窗口放在屏幕的右侧，缺省在左侧
+"let Tlist_Show_Menu=1                      "显示taglist菜单
+"let Tlist_GainFocus_On_ToggleOpen=0        "设置打开文件的时候，焦点在tag窗口中
+let Tlist_Process_File_Always=1             "实时更新tags
+noremap <silent> <F12> :TlistToggle<CR>
 
 "----------------------------------------------------------------------
 " 文本对象：textobj 全家桶
@@ -285,7 +367,7 @@ endif
 
 
 "----------------------------------------------------------------------
-" airline
+" airline 状态栏美化插件
 "----------------------------------------------------------------------
 if index(g:bundle_group, 'airline') >= 0
 	Plug 'vim-airline/vim-airline'
@@ -308,6 +390,8 @@ endif
 
 "----------------------------------------------------------------------
 " NERDTree
+" <space>nt :NERDTreeToggle 隐藏/显示
+" <space>nn :NERDTree 打开
 "----------------------------------------------------------------------
 if index(g:bundle_group, 'nerdtree') >= 0
 	Plug 'scrooloose/nerdtree', {'on': ['NERDTree', 'NERDTreeFocus', 'NERDTreeToggle', 'NERDTreeCWD', 'NERDTreeFind'] }
@@ -315,6 +399,8 @@ if index(g:bundle_group, 'nerdtree') >= 0
 	let g:NERDTreeMinimalUI = 1
 	let g:NERDTreeDirArrows = 1
 	let g:NERDTreeHijackNetrw = 0
+	"let NERDTreeShowBookmarks=1            "自动显示书签
+	"autocmd VimEnter * NERDTree            "默认开启
 	noremap <space>nn :NERDTree<cr>
 	noremap <space>no :NERDTreeFocus<cr>
 	noremap <space>nm :NERDTreeMirror<cr>
@@ -420,8 +506,9 @@ endif
 " LeaderF：CtrlP / FZF 的超级代替者，文件模糊匹配，tags/函数名 选择
 "----------------------------------------------------------------------
 if index(g:bundle_group, 'leaderf') >= 0
+
 	" 如果 vim 支持 python 则启用  Leaderf
-	if has('python') || has('python3')
+	if v:version >= 800 && (has('python') || has('python3'))
 		Plug 'Yggdroot/LeaderF'
 
 		" CTRL+p 打开文件模糊匹配
