@@ -41,11 +41,8 @@ LoadScript init/init-config.vim
 LoadScript init/init-tabsize.vim
 
 " 插件加载
-if v:version >= 800
 	LoadScript init/init-plugins.vim
-else
-	LoadScript init/init-plugins7.vim
-endif
+
 " 界面样式
 LoadScript init/init-style.vim
 
