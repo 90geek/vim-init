@@ -196,6 +196,9 @@ endif
 " 详细用法见：https://zhuanlan.zhihu.com/p/36279445
 "----------------------------------------------------------------------
 if index(g:bundle_group, 'tags') >= 0
+  ":tag/Ctrl-]/vim -t将使用:cstag，而不是默认的:tag
+  "`Ctrl-]` 查看定义一个定义直接跳转，多个定义列出提供用户选择
+  set cscopetag
 
 	if v:version >= 800
 		" 提供 ctags/gtags 后台数据库自动更新功能
@@ -252,8 +255,6 @@ if index(g:bundle_group, 'tags') >= 0
 			"指定:cstag的搜索顺序。0表示先搜索cscope数据库，若不匹配，再搜索tag文件，1
 			"则相反
 			set csto=0
-			":tag/Ctrl-]/vim -t将使用:cstag，而不是默认的:tag
-			set cst
 			"+(将结果追加到quickfix窗口)、-(清空上一次的结果)、0(不使用quickfix。没有指定也相当于标志为0)))
 			set cscopequickfix=s-,c-,d-,i-,t-,e- " 使用QuickFix窗口来显示cscope查找结果
 			set nocsverb		"增加cscope数据库时，将不会打印成功或失败信息
