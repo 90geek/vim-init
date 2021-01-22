@@ -368,7 +368,7 @@ else
 				\ --include='*.h' --include='*.c*' --include='*.py' 
 				\ --include='*.js' --include='*.vim' 
 				\--include='*.inf' --include='*.dsc' --include='*.dec' --include='*.fdf' 
-        \--include='*.fdf.inc' --include='*.uni' --include='*.Vfr' --include='vfr' 
+        \--include='*.fdf.inc' --include='*.uni' --include='*.Vfr' --include='*.vfr' 
 				\--include='*.S' --include='*.sh' 
 				\--exclude-dir=Build
 				\ '<root>' <cr>
