@@ -531,7 +531,7 @@ if index(g:bundle_group, 'leaderf') >= 0
 		noremap <m-n> :LeaderfBuffer<cr>
 
 		" ALT+m 全局 tags 模糊匹配
-		noremap <m-m> :LeaderfTag<cr>
+		noremap <m-N> :LeaderfTag<cr>
 
 		" 最大历史文件保存 2048 个
 		let g:Lf_MruMaxFiles = 2048
