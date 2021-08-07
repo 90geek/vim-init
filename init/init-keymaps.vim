@@ -24,6 +24,10 @@ let mapleader=" "
 "更改陪在后立即生效
 " map R :source $MYVIMRC<CR>
 
+" vimdiff
+noremap <silent><M-f> :diffput<CR>
+noremap <silent><M-g> :diffget<CR>
+
 " 全选复制
 nmap <c-a> ggVG$"+y
 " 可使模式复制
