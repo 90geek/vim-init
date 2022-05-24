@@ -34,8 +34,8 @@ nmap <c-a> ggVG$"+y
 vnoremap <c-c> "+y
 
 "鼠标开启关闭快捷键
-noremap <silent><M-m> :set mouse=a<CR>
-noremap <silent><M-m><M-m> :set mouse=<CR>
+noremap <silent><space>m :set mouse=a<CR>
+noremap <silent><space>m<space>m :set mouse=<CR>
 
 "光标行末
 noremap <C-i> $
