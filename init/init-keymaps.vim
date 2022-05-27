@@ -19,10 +19,14 @@
 "----------------------------------------------------------------------
 " 自定义 键位
 "----------------------------------------------------------------------
-"自定义leader，默认\
+"自定义leader，默认\,配置为空格
 let mapleader=" "
-"更改陪在后立即生效
+"更改配置后立即生效
 " map R :source $MYVIMRC<CR>
+
+" tab size
+noremap <silent><M-t>2 :set sw=4<CR>:set ts=4<CR>:set noet<CR>:set softtabstop=4<CR>
+noremap <silent><M-t>1 :set sw=2<CR>:set ts=2<CR>:set et<CR>:set softtabstop=2<CR>
 
 " vimdiff
 noremap <silent><M-f> :diffput<CR>
