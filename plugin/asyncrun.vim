@@ -1077,7 +1077,11 @@ endfunc
 
 " get project root
 function! asyncrun#get_root(path, ...)
+  if g:submodule==1
+	let markers = ['.gitmodules' ]
+  else
 	let markers = ['.project', '.git', '.hg', '.svn', '.root']
+  endif
 	if exists('g:asyncrun_rootmarks')
 		let markers = g:asyncrun_rootmarks
 	endif

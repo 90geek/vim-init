@@ -30,6 +30,11 @@ function! s:path(path)
 	return substitute(path, '\\', '/', 'g')
 endfunc
 
+if filereadable(expand(".gitmodules"))    " 判断文件是否存在"
+  let g:submodule=1
+else
+  let g:submodule=0
+endif
 
 "----------------------------------------------------------------------
 " 在 ~/.vim/bundles 下安装插件
@@ -540,7 +545,11 @@ if index(g:bundle_group, 'leaderf') >= 0
 		let g:Lf_StlSeparator = { 'left': '', 'right': '', 'font': '' }
 
 		" 如何识别项目目录，从当前文件目录向父目录递归知道碰到下面的文件/目录
+  if g:submodule==1
+		let g:Lf_RootMarkers = ['.gitmodules']
+  else
 		let g:Lf_RootMarkers = ['.project', '.root', '.svn', '.git']
+  endif
 		let g:Lf_WorkingDirectoryMode = 'Ac'
 		let g:Lf_WindowHeight = 0.30
 		let g:Lf_CacheDirectory = expand('~/.vim/cache')
@@ -592,7 +601,11 @@ if index(g:bundle_group, 'leaderf') >= 0
 		  \ }
 
 		" 项目标志
+  if g:submodule==1
+		let g:ctrlp_root_markers = ['.root']
+  else
 		let g:ctrlp_root_markers = ['.project', '.root', '.svn', '.git']
+  endif
 		let g:ctrlp_working_path = 0
 
 		" CTRL+p 打开文件模糊匹配
