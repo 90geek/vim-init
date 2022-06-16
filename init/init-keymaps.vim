@@ -25,8 +25,10 @@ let mapleader=" "
 " map R :source $MYVIMRC<CR>
 
 " tab size
-noremap <silent><M-t>2 :set sw=4<CR>:set ts=4<CR>:set noet<CR>:set softtabstop=4<CR>
-noremap <silent><M-t>1 :set sw=2<CR>:set ts=2<CR>:set et<CR>:set softtabstop=2<CR>
+noremap <silent><M-t>1 :set sw=2<CR>:set ts=2<CR>:set et<CR>:set softtabstop=2<CR>:%retab!<CR>
+noremap <silent><M-t>2 :set sw=2<CR>:set ts=2<CR>:set noet<CR>:set softtabstop=2<CR>:%retab!<CR>
+noremap <silent><M-t>3 :set sw=4<CR>:set ts=4<CR>:set noet<CR>:set softtabstop=4<CR>:%retab!<CR>
+noremap <silent><M-t>4 :set sw=4<CR>:set ts=4<CR>:set et<CR>:set softtabstop=4<CR>:%retab!<CR>
 
 " vimdiff
 noremap <silent><M-f> :diffput<CR>
