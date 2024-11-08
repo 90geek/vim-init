@@ -2,12 +2,12 @@
 "
 " init-keymaps.vim - 按键设置，按你喜欢更改
 "
-"   - 快速移动
-"   - 标签切换
-"   - 窗口切换
-"   - 终端支持
-"   - 编译运行
-"   - 符号搜索
+"		- 快速移动
+"		- 标签切换
+"		- 窗口切换
+"		- 终端支持
+"		- 编译运行
+"		- 符号搜索
 "
 " Created by skywind on 2018/05/30
 " Last Modified: 2018/05/30 17:59:31
@@ -378,7 +378,8 @@ else
 				\ --include='*.h' --include='*.c*' --include='*.py' 
 				\ --include='*.js' --include='*.vim' 
 				\--include='*.inf' --include='*.dsc' --include='*.dec' --include='*.fdf' 
-        \--include='*.fdf.inc' --include='*.uni' --include='*.Vfr' --include='*.vfr' 
+				\--include='*.fdf.inc' --include='*.uni' --include='*.Vfr' --include='*.vfr' 
+				\--include='*.asl'
 				\--include='*.S' --include='*.sh' 
 				\--exclude-dir=Build
 				\ '<root>' <cr>
